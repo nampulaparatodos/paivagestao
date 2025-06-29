@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiva Gestão e Finanças| Educação Financeira</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2c6e49;
+            --primary-light: #4c956c;
+            --primary-dark: #1b4332;
+            --accent: #fefee3;
+            --light: #d8f3dc;
+            --light-gray: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+            --danger: #e63946;
+            --success: #2a9d8f;
+            --warning: #e9c46a;
+            --border-radius: 12px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f9fbfa;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            border-radius: 50%;
+            color: white;
+            font-weight: 700;
+            font-size: 22px;
+        }
+        
+        .company-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .company-name span:first-child {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .company-name span:last-child {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary-light);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, rgba(44, 110, 73, 0.9), rgba(76, 149, 108, 0.85)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1611&q=80') center/cover;
+            color: white;
+            padding: 6rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--primary-dark);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            margin-top: 1rem;
+            border: 2px solid transparent;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: white;
+            border-color: var(--accent);
+        }
+        
+        /* Educação Financeira */
+        .section {
+            padding: 5rem 5%;
+        }
+        
+        .section-white {
+            background: white;
+        }
+        
+        .section-light {
+            background: var(--light-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            font-size: 1.1rem;
+        }
+        
+        /* Ferramentas */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-header {
+            padding: 1.5rem;
+            color: white;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .tool-header i {
+            font-size: 1.8rem;
+        }
+        
+        .tool-header h3 {
+            font-size: 1.5rem;
+        }
+        
+        .tool-body {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .calculator-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex-grow: 1;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-group label i {
+            color: var(--primary);
+        }
+        
+        .form-group input, .form-group select {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44, 110, 73, 0.2);
+        }
+        
+        .calculator-btn {
+            padding: 1rem;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            color: white;
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(44, 110, 73, 0.3);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .calculator-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(44, 110, 73, 0.4);
+        }
+        
+        .results-container {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(216, 243, 220, 0.3);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .results-title {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .results-title i {
+            font-size: 1.5rem;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+        }
+        
+        .progress-container {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .chart-container {
+            margin: 20px 0;
+            height: 250px;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid;
+        }
+        
+        .alert-danger {
+            background: rgba(230, 57, 70, 0.1);
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        
+        .alert-success {
+            background: rgba(42, 157, 143, 0.1);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        
+        .alert-warning {
+            background: rgba(233, 196, 106, 0.1);
+            border-color: var(--warning);
+            color: var(--warning);
+        }
+        
+        .alert i {
+            font-size: 1.5rem;
+        }
+        
+        /* Dicas */
+        .tips-section {
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            color: white;
+            padding: 5rem 5%;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .tip-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .tip-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tip-card p {
+            opacity: 0.9;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .contact-item i {
+            color: var(--accent);
+            min-width: 20px;
+            margin-top: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            
+            .menu-toggle {
+                display: block;
+                order: 2;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 0;
+                order: 3;
+                gap: 15px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hero {
+                padding: 4rem 5%;
+                min-height: auto;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .company-name {
+                font-size: 1.2rem;
+            }
+            
+            .company-name span:last-child {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .tool-body {
+                padding: 1.5rem;
+            }
+            
+            .footer-column {
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .contact-item {
+                justify-content: center;
+            }
+            
+            .footer-links a:hover {
+                padding-left: 0;
+            }
+            
+            .company-name {
+                font-size: 1rem;
+            }
+            
+            .company-name span:last-child {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 3rem 5%;
+            }
+            
+            .logo-img {
+                height: 40px;
+                width: 40px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Animação de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo-img">
+                <img src="Gestao.png" alt="Logo Paiva Gestão e Finanças" height="50">
+            </div>
+            <div class="company-name">
+                <span>PAIVA</span>
+                <span>Gestão e Finanças</span>
+            </div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="#home">Início</a>
+            <a href="#contact">Contacto</a>
+            <a href="index.html">Voltar a pagina inicial</a>
+        </div>
+        
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Controle Suas Finanças, Conquiste Seus Sonhos</h1>
+            <p>Aprenda a tomar decisões financeiras inteligentes, controlar suas finanças e construir um futuro próspero com nossas ferramentas especializadas.</p>
+        </div>
+    </section>
+
+    <!-- Ferramentas de Educação Financeira -->
+    <section class="section section-light" id="tools">
+        <div class="section-title">
+            <h2>Ferramentas de Educação Financeira</h2>
+            <p>Recursos práticos para melhorar sua saúde financeira</p>
+        </div>
+        
+        <div class="tools-grid">
+            <!-- Orçamento Pessoal -->
+            <div class="tool-card animated">
+                <div class="tool-header">
+                    <i class="fas fa-wallet"></i>
+                    <h3>Orçamento Pessoal</h3>
+                </div>
+                <div class="tool-body">
+                    <div class="calculator-form" id="budget-form">
+                        <div class="form-group">
+                            <label for="income"><i class="fas fa-money-bill-wave"></i> Renda Mensal (MZN)</label>
+                            <input type="number" id="income" placeholder="Ex: 10000" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="housing"><i class="fas fa-home"></i> Habitação (MZN)</label>
+                            <input type="number" id="housing" placeholder="Ex: 3000" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="transport"><i class="fas fa-bus"></i> Transporte (MZN)</label>
+                            <input type="number" id="transport" placeholder="Ex: 1000" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="food"><i class="fas fa-utensils"></i> Alimentação (MZN)</label>
+                            <input type="number" id="food" placeholder="Ex: 2000" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="other"><i class="fas fa-shopping-cart"></i> Outras Despesas (MZN)</label>
+                            <input type="number" id="other" placeholder="Ex: 1500" min="0" required>
+                        </div>
+                        
+                        <button type="button" class="calculator-btn" onclick="calculateBudget()">
+                            <i class="fas fa-calculator"></i> Calcular Orçamento
+                        </button>
+                        
+                        <div class="results-container" id="budget-results" style="display: none;">
+                            <div class="results-title">
+                                <i class="fas fa-chart-pie"></i> Resultados do Orçamento
+                            </div>
+                            
+                            <div class="chart-container">
+                                <canvas id="budgetChart"></canvas>
+                            </div>
+                            
+                            <div class="result-item">
+                                <span>Despesas Totais:</span>
+                                <span id="total-expenses">MZN 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Saldo Disponível:</span>
+                                <span id="available-balance">MZN 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Porcentagem de Economia:</span>
+                                <span id="savings-percentage">0%</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="savings-progress" style="width: 0%"></div>
+                            </div>
+                            
+                            <div id="budget-alert"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Planejamento de Aposentadoria -->
+            <div class="tool-card animated delay-1">
+                <div class="tool-header">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <h3>Planejamento de Aposentadoria</h3>
+                </div>
+                <div class="tool-body">
+                    <div class="calculator-form" id="retirement-form">
+                        <div class="form-group">
+                            <label for="current-age"><i class="fas fa-user-clock"></i> Idade Atual</label>
+                            <input type="number" id="current-age" placeholder="Ex: 30" min="18" max="70" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="retirement-age"><i class="fas fa-user-graduate"></i> Idade de Aposentadoria</label>
+                            <input type="number" id="retirement-age" placeholder="Ex: 65" min="40" max="90" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="current-savings"><i class="fas fa-piggy-bank"></i> Economias Atuais (MZN)</label>
+                            <input type="number" id="current-savings" placeholder="Ex: 50000" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="monthly-contribution"><i class="fas fa-hand-holding-usd"></i> Contribuição Mensal (MZN)</label>
+                            <input type="number" id="monthly-contribution" placeholder="Ex: 1000" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="return-rate"><i class="fas fa-chart-line"></i> Taxa de Retorno Anual (%)</label>
+                            <input type="number" id="return-rate" placeholder="Ex: 7" min="1" max="20" step="0.1" required>
+                        </div>
+                        
+                        <button type="button" class="calculator-btn" onclick="calculateRetirement()">
+                            <i class="fas fa-calculator"></i> Calcular Aposentadoria
+                        </button>
+                        
+                        <div class="results-container" id="retirement-results" style="display: none;">
+                            <div class="results-title">
+                                <i class="fas fa-coins"></i> Projeção de Aposentadoria
+                            </div>
+                            
+                            <div class="chart-container">
+                                <canvas id="retirementChart"></canvas>
+                            </div>
+                            
+                            <div class="result-item">
+                                <span>Anos até a aposentadoria:</span>
+                                <span id="years-to-retirement">0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Total Economizado:</span>
+                                <span id="total-savings">MZN 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Renda Mensal Estimada:</span>
+                                <span id="monthly-income">MZN 0</span>
+                            </div>
+                            
+                            <div id="retirement-alert"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gestão de Dívidas -->
+            <div class="tool-card animated">
+                <div class="tool-header">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>Gestão de Dívidas</h3>
+                </div>
+                <div class="tool-body">
+                    <div class="calculator-form" id="debt-form">
+                        <div class="form-group">
+                            <label for="total-debt"><i class="fas fa-money-check-alt"></i> Total da Dívida (MZN)</label>
+                            <input type="number" id="total-debt" placeholder="Ex: 25000" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest-rate"><i class="fas fa-percentage"></i> Taxa de Juros Mensal (%)</label>
+                            <input type="number" id="interest-rate" placeholder="Ex: 5" min="0" max="50" step="0.1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="monthly-payment"><i class="fas fa-hand-holding-usd"></i> Pagamento Mensal (MZN)</label>
+                            <input type="number" id="monthly-payment" placeholder="Ex: 1500" min="0" required>
+                        </div>
+                        
+                        <button type="button" class="calculator-btn" onclick="calculateDebt()">
+                            <i class="fas fa-calculator"></i> Calcular Plano
+                        </button>
+                        
+                        <div class="results-container" id="debt-results" style="display: none;">
+                            <div class="results-title">
+                                <i class="fas fa-file-invoice-dollar"></i> Plano de Pagamento
+                            </div>
+                            
+                            <div class="chart-container">
+                                <canvas id="debtChart"></canvas>
+                            </div>
+                            
+                            <div class="result-item">
+                                <span>Meses para quitar:</span>
+                                <span id="months-to-pay">0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Total de juros pagos:</span>
+                                <span id="total-interest">MZN 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Economia com pagamentos extras:</span>
+                                <span id="savings-extra">MZN 0</span>
+                            </div>
+                            
+                            <div id="debt-alert"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Investimentos Pessoais -->
+            <div class="tool-card animated delay-1">
+                <div class="tool-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Investimentos Pessoais</h3>
+                </div>
+                <div class="tool-body">
+                    <div class="calculator-form" id="investment-form">
+                        <div class="form-group">
+                            <label for="initial-investment"><i class="fas fa-hand-holding-usd"></i> Investimento Inicial (MZN)</label>
+                            <input type="number" id="initial-investment" placeholder="Ex: 5000" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="monthly-investment"><i class="fas fa-coins"></i> Investimento Mensal (MZN)</label>
+                            <input type="number" id="monthly-investment" placeholder="Ex: 500" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="investment-years"><i class="fas fa-calendar-alt"></i> Período de Investimento (Anos)</label>
+                            <input type="number" id="investment-years" placeholder="Ex: 10" min="1" max="50" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="investment-return"><i class="fas fa-chart-line"></i> Retorno Anual Esperado (%)</label>
+                            <input type="number" id="investment-return" placeholder="Ex: 8" min="1" max="30" step="0.1" required>
+                        </div>
+                        
+                        <button type="button" class="calculator-btn" onclick="calculateInvestment()">
+                            <i class="fas fa-calculator"></i> Calcular Investimento
+                        </button>
+                        
+                        <div class="results-container" id="investment-results" style="display: none;">
+                            <div class="results-title">
+                                <i class="fas fa-chart-bar"></i> Projeção de Investimento
+                            </div>
+                            
+                            <div class="chart-container">
+                                <canvas id="investmentChart"></canvas>
+                            </div>
+                            
+                            <div class="result-item">
+                                <span>Valor Total Investido:</span>
+                                <span id="total-invested">MZN 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Valor Futuro Estimado:</span>
+                                <span id="future-value">MZN 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Juros Ganhos:</span>
+                                <span id="interest-earned">MZN 0</span>
+                            </div>
+                            
+                            <div id="investment-alert"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dicas Financeiras -->
+    <section class="tips-section">
+        <div class="section-title">
+            <h2 style="color: white;">Dicas Financeiras Essenciais</h2>
+            <p style="color: rgba(255, 255, 255, 0.9);">Conhecimento prático para sua jornada financeira</p>
+        </div>
+        
+        <div class="tips-grid">
+            <div class="tip-card animated">
+                <i class="fas fa-piggy-bank"></i>
+                <h3>Economize Primeiro</h3>
+                <p>Pague a si mesmo primeiro. Reserve pelo menos 10-20% de sua renda assim que recebê-la, antes de pagar outras contas. Isso garante que você priorize seu futuro financeiro.</p>
+            </div>
+            
+            <div class="tip-card animated delay-1">
+                <i class="fas fa-ban"></i>
+                <h3>Evite Dívidas Ruins</h3>
+                <p>Dívidas com juros altos (como cartões de crédito) podem destruir suas finanças. Priorize o pagamento dessas dívidas e evite novas dívidas desnecessárias.</p>
+            </div>
+            
+            <div class="tip-card animated delay-2">
+                <i class="fas fa-book"></i>
+                <h3>Educação Contínua</h3>
+                <p>O mercado financeiro está sempre evoluindo. Reserve tempo mensal para ler livros, artigos ou assistir vídeos sobre finanças pessoais e investimentos.</p>
+            </div>
+            
+            <div class="tip-card animated">
+                <i class="fas fa-seedling"></i>
+                <h3>Comece Cedo</h3>
+                <p>O poder dos juros compostos funciona melhor com o tempo. Mesmo pequenas quantias investidas regularmente podem crescer significativamente ao longo de décadas.</p>
+            </div>
+            
+            <div class="tip-card animated delay-1">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Reserva de Emergência</h3>
+                <p>Construa uma reserva equivalente a 3-6 meses de despesas. Isso protege você de imprevistos e evita que você precise recorrer a empréstimos caros.</p>
+            </div>
+            
+            <div class="tip-card animated delay-2">
+                <i class="fas fa-bullseye"></i>
+                <h3>Metas Claros</h3>
+                <p>Defina objetivos financeiros específicos, mensuráveis e com prazos. Isso ajuda a manter o foco e motiva você a persistir em seu plano financeiro.</p>
+            </div>
+        </div>
+    </section>
+
+  <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="logo-container" style="margin-bottom: 1rem;">
+                    <div class="logo-img">
+                        <img src="Gestao.png" alt="Logo Paiva Gestão e Finanças" height="50">
+                    </div>
+                    <div class="company-name">
+                        <span style="color:white;">PAIVA</span>
+                        <span>Gestão e Finanças</span>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; color: rgba(255, 255, 255, 0.8);">Soluções integradas para transformar sua gestão com tecnologia de ponta e suporte especializado.</p>
+            
+            </div>
+    
+            <div class="footer-column">
+                <h3>Ferramentas</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Orçamento Pessoal</a></li>
+                    <li><a href="#">Planejamento de Aposentadoria</a></li>
+                    <li><a href="#">Gestão de Dívidas</a></li>
+                    <li><a href="#">Investimentos Pessoais</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Napipine, Gorongosa<br>Nampula, Mz</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(+258)87 441 3363</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>heliopaiva111@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Paiva Gestão e Finanças. Todos os direitos reservados.
+        </div>
+    </footer>
+    
+    <script>
+        // Menu toggle para mobile
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Inicializar gráficos
+        const budgetChart = new Chart(document.getElementById('budgetChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Habitação', 'Transporte', 'Alimentação', 'Outros', 'Economia'],
+                datasets: [{
+                    data: [0, 0, 0, 0, 0],
+                    backgroundColor: [
+                        '#4c956c',
+                        '#2c6e49',
+                        '#1b4332',
+                        '#d8f3dc',
+                        '#fefee3'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+        
+        const retirementChart = new Chart(document.getElementById('retirementChart'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Crescimento do Investimento',
+                    data: [],
+                    fill: true,
+                    backgroundColor: 'rgba(76, 149, 108, 0.2)',
+                    borderColor: '#4c956c',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        const debtChart = new Chart(document.getElementById('debtChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Dívida Principal', 'Juros Pagos'],
+                datasets: [{
+                    label: 'Valor (MZN)',
+                    data: [0, 0],
+                    backgroundColor: [
+                        '#4c956c',
+                        '#2c6e49'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+        
+        const investmentChart = new Chart(document.getElementById('investmentChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Total Investido', 'Juros Ganhos'],
+                datasets: [{
+                    label: 'Valor (MZN)',
+                    data: [0, 0],
+                    backgroundColor: [
+                        '#4c956c',
+                        '#2c6e49'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+        
+        // Cálculo de orçamento pessoal
+        function calculateBudget() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const housing = parseFloat(document.getElementById('housing').value) || 0;
+            const transport = parseFloat(document.getElementById('transport').value) || 0;
+            const food = parseFloat(document.getElementById('food').value) || 0;
+            const other = parseFloat(document.getElementById('other').value) || 0;
+            
+            const totalExpenses = housing + transport + food + other;
+            const availableBalance = income - totalExpenses;
+            const savingsPercentage = (availableBalance / income) * 100;
+            
+            document.getElementById('total-expenses').textContent = `MZN ${totalExpenses.toFixed(2)}`;
+            document.getElementById('available-balance').textContent = `MZN ${availableBalance.toFixed(2)}`;
+            document.getElementById('savings-percentage').textContent = `${savingsPercentage.toFixed(1)}%`;
+            document.getElementById('savings-progress').style.width = `${Math.min(savingsPercentage, 100)}%`;
+            
+            // Atualizar gráfico
+            budgetChart.data.datasets[0].data = [housing, transport, food, other, availableBalance];
+            budgetChart.update();
+            
+            // Alertas e recomendações
+            const alertContainer = document.getElementById('budget-alert');
+            alertContainer.innerHTML = '';
+            
+            if (availableBalance < 0) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-danger';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Alerta Crítico!</strong> Você está gastando mais do que ganha. 
+                        Reduza despesas imediatamente para evitar problemas financeiros graves.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            } else if (savingsPercentage < 10) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-warning';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <strong>Atenção!</strong> Sua taxa de economia está abaixo do recomendado (10%). 
+                        Considere reduzir despesas para garantir sua segurança financeira.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            } else {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-success';
+                alert.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Parabéns!</strong> Suas finanças estão saudáveis. 
+                        Continue economizando e considere investir parte do seu saldo disponível.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            }
+            
+            document.getElementById('budget-results').style.display = 'block';
+        }
+        
+        // Cálculo de aposentadoria
+        function calculateRetirement() {
+            const currentAge = parseInt(document.getElementById('current-age').value) || 30;
+            const retirementAge = parseInt(document.getElementById('retirement-age').value) || 65;
+            const currentSavings = parseFloat(document.getElementById('current-savings').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthly-contribution').value) || 0;
+            const returnRate = parseFloat(document.getElementById('return-rate').value) || 7;
+            
+            const yearsToRetirement = retirementAge - currentAge;
+            const months = yearsToRetirement * 12;
+            const monthlyRate = returnRate / 100 / 12;
+            
+            // Simular crescimento ao longo dos anos
+            let savingsData = [currentSavings];
+            let labels = ['Atual'];
+            let current = currentSavings;
+            
+            for (let year = 1; year <= yearsToRetirement; year++) {
+                for (let month = 1; month <= 12; month++) {
+                    current = current * (1 + monthlyRate) + monthlyContribution;
+                }
+                savingsData.push(current);
+                labels.push(`Ano ${year}`);
+            }
+            
+            // Atualizar gráfico
+            retirementChart.data.labels = labels;
+            retirementChart.data.datasets[0].data = savingsData;
+            retirementChart.update();
+            
+            const futureValue = savingsData[savingsData.length - 1];
+            const monthlyIncome = (futureValue * (returnRate / 100 / 12)).toFixed(2);
+            
+            document.getElementById('years-to-retirement').textContent = yearsToRetirement;
+            document.getElementById('total-savings').textContent = `MZN ${futureValue.toFixed(2)}`;
+            document.getElementById('monthly-income').textContent = `MZN ${monthlyIncome}`;
+            
+            // Alertas e recomendações
+            const alertContainer = document.getElementById('retirement-alert');
+            alertContainer.innerHTML = '';
+            
+            const desiredIncome = income * 0.7; // 70% da renda atual
+            const projectedIncome = parseFloat(monthlyIncome);
+            
+            if (projectedIncome < desiredIncome * 0.5) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-danger';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Alerta Crítico!</strong> Sua renda projetada está muito abaixo do necessário. 
+                        Considere aumentar suas contribuições mensais ou ajustar sua idade de aposentadoria.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            } else if (projectedIncome < desiredIncome) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-warning';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <strong>Atenção!</strong> Sua renda projetada está abaixo do recomendado. 
+                        Aumente suas contribuições em pelo menos 20% para garantir uma aposentadoria confortável.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            } else {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-success';
+                alert.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Parabéns!</strong> Sua projeção de aposentadoria está no caminho certo. 
+                        Continue com seu plano e considere revisar anualmente.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            }
+            
+            document.getElementById('retirement-results').style.display = 'block';
+        }
+        
+        // Cálculo de gestão de dívidas
+        function calculateDebt() {
+            const totalDebt = parseFloat(document.getElementById('total-debt').value) || 0;
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) || 5;
+            const monthlyPayment = parseFloat(document.getElementById('monthly-payment').value) || 0;
+            
+            const monthlyRate = interestRate / 100;
+            let balance = totalDebt;
+            let months = 0;
+            let totalInterest = 0;
+            
+            // Simulação de pagamento
+            while (balance > 0 && months < 120) {
+                const monthlyInterest = balance * monthlyRate;
+                const principalPayment = monthlyPayment - monthlyInterest;
+                
+                if (principalPayment <= 0) {
+                    months = 999; // Pagamento insuficiente
+                    break;
+                }
+                
+                balance -= principalPayment;
+                totalInterest += monthlyInterest;
+                months++;
+            }
+            
+            // Atualizar gráfico
+            debtChart.data.datasets[0].data = [totalDebt, totalInterest];
+            debtChart.update();
+            
+            document.getElementById('months-to-pay').textContent = months > 120 ? "Pagamento insuficiente" : months;
+            document.getElementById('total-interest').textContent = `MZN ${totalInterest.toFixed(2)}`;
+            
+            // Alertas e recomendações
+            const alertContainer = document.getElementById('debt-alert');
+            alertContainer.innerHTML = '';
+            
+            if (months > 120) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-danger';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Alerta Crítico!</strong> Seu pagamento mensal é insuficiente para cobrir os juros. 
+                        Aumente imediatamente seu pagamento em pelo menos 30% ou busque renegociação.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            } else if (months > 36) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-warning';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <strong>Atenção!</strong> Seu plano de pagamento é muito longo. 
+                        Aumente seu pagamento em 15-20% para reduzir significativamente os juros pagos.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            } else {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-success';
+                alert.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Parabéns!</strong> Seu plano de pagamento é eficiente. 
+                        Continue com os pagamentos e evite novas dívidas.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            }
+            
+            document.getElementById('debt-results').style.display = 'block';
+        }
+        
+        // Cálculo de investimentos
+        function calculateInvestment() {
+            const initialInvestment = parseFloat(document.getElementById('initial-investment').value) || 0;
+            const monthlyInvestment = parseFloat(document.getElementById('monthly-investment').value) || 0;
+            const years = parseInt(document.getElementById('investment-years').value) || 10;
+            const returnRate = parseFloat(document.getElementById('investment-return').value) || 8;
+            
+            const months = years * 12;
+            const monthlyRate = returnRate / 100 / 12;
+            
+            // Fórmula do valor futuro de uma série de pagamentos
+            let futureValue = initialInvestment * Math.pow(1 + monthlyRate, months);
+            futureValue += monthlyInvestment * (Math.pow(1 + monthlyRate, months) - 1) / monthlyRate;
+            
+            const totalInvested = initialInvestment + (monthlyInvestment * months);
+            const interestEarned = futureValue - totalInvested;
+            
+            // Atualizar gráfico
+            investmentChart.data.datasets[0].data = [totalInvested, interestEarned];
+            investmentChart.update();
+            
+            document.getElementById('total-invested').textContent = `MZN ${totalInvested.toFixed(2)}`;
+            document.getElementById('future-value').textContent = `MZN ${futureValue.toFixed(2)}`;
+            document.getElementById('interest-earned').textContent = `MZN ${interestEarned.toFixed(2)}`;
+            
+            // Alertas e recomendações
+            const alertContainer = document.getElementById('investment-alert');
+            alertContainer.innerHTML = '';
+            
+            const roi = (interestEarned / totalInvested) * 100;
+            
+            if (roi < 30) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-warning';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <strong>Atenção!</strong> Seu retorno sobre o investimento está abaixo do mercado. 
+                        Considere diversificar seus investimentos ou buscar opções com melhor rentabilidade.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            } else {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-success';
+                alert.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Parabéns!</strong> Seu plano de investimento está gerando bons resultados. 
+                        Continue com seu plano e considere reinvestir os rendimentos.
+                    </div>
+                `;
+                alertContainer.appendChild(alert);
+            }
+            
+            document.getElementById('investment-results').style.display = 'block';
+        }
+        
+        // Preencher valores de exemplo para demonstração
+        window.onload = function() {
+            document.getElementById('income').value = 15000;
+            document.getElementById('housing').value = 4500;
+            document.getElementById('transport').value = 1200;
+            document.getElementById('food').value = 2500;
+            document.getElementById('other').value = 1800;
+            
+            document.getElementById('current-age').value = 35;
+            document.getElementById('retirement-age').value = 65;
+            document.getElementById('current-savings').value = 50000;
+            document.getElementById('monthly-contribution').value = 1500;
+            document.getElementById('return-rate').value = 7;
+            
+            document.getElementById('total-debt').value = 30000;
+            document.getElementById('interest-rate').value = 4.5;
+            document.getElementById('monthly-payment').value = 1200;
+            
+            document.getElementById('initial-investment').value = 10000;
+            document.getElementById('monthly-investment').value = 800;
+            document.getElementById('investment-years').value = 15;
+            document.getElementById('investment-return').value = 9;
+        };
+    </script>
+</body>
+</html>

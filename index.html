@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Paiva Gestão e Finanças</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    
+        :root {
+            --primary: #2c6e49;
+            --primary-light: #4c956c;
+            --primary-dark: #1b4332;
+            --accent: #fefee3;
+            --light: #d8f3dc;
+            --light-gray: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+            --border-radius: 12px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f9fbfa;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-width: 320px; /* Garante que não fique menor que 320px */
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+        
+        .logo-img img {
+            max-height: 100%;
+            max-width: 100%;
+            display: block;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .company-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .company-name span:first-child {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .company-name span:last-child {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary-light);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, rgba(44, 110, 73, 0.9), rgba(76, 149, 108, 0.85)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3') center/cover;
+            color: white;
+            padding: 6rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 5rem 5%;
+        }
+        
+        .section-white {
+            background: white;
+        }
+        
+        .section-light {
+            background: var(--light-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            font-size: 1.1rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            background: rgba(44, 110, 73, 0.1);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .about-card h3 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        /* Calculadoras Principais */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calculator-header {
+            padding: 2.5rem 2rem;
+            color: white;
+            text-align: center;
+            background: var(--primary);
+        }
+        
+        .calculator-header i {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .calculator-header h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .calculator-body {
+            padding: 2.5rem 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .calculator-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+        
+        .calculator-btn {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            color: white;
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(44, 110, 73, 0.3);
+            text-decoration: none;
+        }
+        
+        .calculator-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(44, 110, 73, 0.4);
+        }
+        
+        .calculator-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .calculator-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Features */
+        .features {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+        
+        .feature-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .contact-item i {
+            color: var(--accent);
+            min-width: 20px;
+            margin-top: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            
+            .menu-toggle {
+                display: block;
+                order: 2;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 0;
+                order: 3;
+                gap: 15px;
+                background: white;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                margin-top: 10px;
+                border-radius: 10px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hero {
+                padding: 4rem 5%;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .company-name {
+                font-size: 1.2rem;
+            }
+            
+            .company-name span:last-child {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .about-card {
+                padding: 1.8rem;
+            }
+            
+            .calculator-header {
+                padding: 1.8rem 1.5rem;
+            }
+            
+            .calculator-header h3 {
+                font-size: 1.7rem;
+            }
+            
+            .calculator-body {
+                padding: 1.8rem 1.5rem;
+            }
+            
+            .footer-column {
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .contact-item {
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-links a:hover {
+                padding-left: 0;
+            }
+            
+            .company-name {
+                font-size: 1rem;
+            }
+            
+            .company-name span:last-child {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 3rem 5%;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .company-name {
+                font-size: 0.9rem;
+            }
+            
+            .company-name span:last-child {
+                font-size: 0.7rem;
+            }
+            
+            .calculator-header i {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .hero h1 {
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .section {
+                padding: 2rem 5%;
+            }
+            
+            .section-title h2 {
+                font-size: 1.7rem;
+            }
+            
+            .section-title p {
+                font-size: 0.95rem;
+            }
+            
+            .about-card {
+                padding: 1.5rem;
+            }
+            
+            .about-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .calculator-header h3 {
+                font-size: 1.5rem;
+            }
+            
+            .calculator-description {
+                font-size: 1rem;
+            }
+            
+            .calculator-btn {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .footer-column h3 {
+                font-size: 1.2rem;
+            }
+            
+            .logo-img {
+                height: 35px;
+            }
+            
+            .company-name {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Animação de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        /* Logo placeholder */
+        .logo-img {
+            background: #2c6e49;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            height: 50px;
+            width: 50px;
+        }
+        
+        /* Evitar quebra de layout em telas muito pequenas */
+        html, body {
+            min-width: 320px;
+            overflow-x: hidden;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo-img">
+                <img src="Gestao.png" alt="Logo Paiva Gestão e Finanças" height="50">
+            </div>
+            <div class="company-name">
+                <span>PAIVA</span>
+                <span>Gestão e Finanças</span>
+            </div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="#home">Início</a>
+            <a href="#about">Sobre</a>
+            <a href="#calculators">Ferramentas</a>
+            <a href="#features">Recursos</a>
+            <a href="#contact">Contacto</a>
+        </div>
+        
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Soluções Inteligentes para Gestão e Finanças</h1>
+            <p>Ferramentas avançadas para otimizar sua agricultura, finanças e educação financeira em uma única plataforma.</p>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section class="section section-white" id="about">
+        <div class="section-title">
+            <h2>Sobre Paiva Gestao e Finanças</h2>
+            <p>Transformando dados em decisões estratégicas para todo Moçambique</p>
+        </div>
+        
+        <div class="about-content">
+            <div class="about-card animated">
+                <i class="fas fa-bullseye"></i>
+                <h3>Nossa Missão</h3>
+                <p>Fornecer soluções tecnológicas inovadoras que simplificam processos complexos de gestão, permitindo que empresas tomem decisões baseadas em dados precisos e aumentem sua eficiência operacional.</p>
+            </div>
+            
+            <div class="about-card animated delay-1">
+                <i class="fas fa-eye"></i>
+                <h3>Nossa Visão</h3>
+                <p>Tornar-nos referência nacional em sistemas de gestão integrada, sendo reconhecidos pela excelência no desenvolvimento de ferramentas que transformam desafios empresariais em oportunidades de crescimento sustentável.</p>
+            </div>
+            
+            <div class="about-card animated delay-2">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>Nossos Valores</h3>
+                <p>
+                    Inovação: Buscamos constantemente novas soluções<br>
+                    Integridade: Agimos com ética e transparência<br>
+                    Excelência: Qualidade em tudo que fazemos<br>
+                    Parceria: Crescimento conjunto com clientes<br>
+                    Sustentabilidade: Soluções que respeitam o futuro
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadoras Principais -->
+    <section class="section section-light" id="calculators">
+        <div class="section-title">
+            <h2>Nossas Ferramentas especializadas</h2>
+            <p>Ferramentas poderosas para cada área de gestão</p>
+        </div>
+        
+        <div class="calculator-grid">
+            <!-- AgroMoçambique -->
+            <div class="calculator-card animated">
+                <div class="calculator-header">
+                    <i class="fas fa-tractor"></i>
+                    <h3>AgroMoçambique</h3>
+                    <p>Soluções para agricultura e produção</p>
+                </div>
+                <div class="calculator-body">
+                    <div class="calculator-description">
+                        <p>Calculadoras especializadas para otimizar a produção agrícola. Ideal para produtores rurais e cooperativas agrícolas.</p>
+                        <ul style="margin-top: 15px; padding-left: 20px; text-align: left;">
+                            <li>Rendimento por hectare</li>
+                            <li>Custos de produção</li>
+                        </ul>
+                    </div>
+                    <a href="agricultura.html" class="calculator-btn">
+                        Acessar AgroMoçambique <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Calculadora Financeira -->
+            <div class="calculator-card animated delay-1">
+                <div class="calculator-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Calculadora Financeira</h3>
+                    <p>Gestão financeira completa</p>
+                </div>
+                <div class="calculator-body">
+                    <div class="calculator-description">
+                        <p>Ferramentas avançadas para gestão financeira empresarial, incluindo cálculo de juros, fluxo de caixa, retorno de investimento e análise de custos. Essencial para tomada de decisões estratégicas.</p>
+                        <ul style="margin-top: 15px; padding-left: 20px; text-align: left;">
+                            <li>Cálculo de juros</li>
+                            <li>Fluxo de caixa</li>
+                            <li>Retorno de investimento</li>
+                            <li>Análise de custos</li>
+                        </ul>
+                    </div>
+                    <a href="calculadora.html" class="calculator-btn">
+                        Acessar Calculadora <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Educação Financeira -->
+            <div class="calculator-card animated delay-2">
+                <div class="calculator-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Educação Financeira</h3>
+                    <p>Conhecimento para decisões inteligentes</p>
+                </div>
+                <div class="calculator-body">
+                    <div class="calculator-description">
+                        <p>Recursos educacionais e ferramentas interativas para melhorar a literacia financeira, planejamento pessoal e familiar, e desenvolvimento de hábitos financeiros saudáveis.</p>
+                        <ul style="margin-top: 15px; padding-left: 20px; text-align: left;">
+                            <li>Orçamento pessoal</li>
+                            <li>Planejamento de aposentadoria</li>
+                            <li>Gestão de dívidas</li>
+                            <li>Investimentos pessoais</li>
+                        </ul>
+                    </div>
+                    <a href="educacao.html" class="calculator-btn">
+                        Acessar Educação Financeira <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2 style="color: white;">Nossos Recursos</h2>
+            <p style="color: rgba(255, 255, 255, 0.9);">Tudo o que você precisa para uma gestão eficiente</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card animated">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Totalmente Responsivo</h3>
+                <p>Acesse de qualquer dispositivo, em qualquer lugar, com experiência otimizada para celulares, tablets e desktops.</p>
+            </div>
+            <div class="feature-card animated delay-2">
+                <i class="fas fa-sync-alt"></i>
+                <h3>Atualizações Constantes</h3>
+                <p>Novas funcionalidades e melhorias contínuas para atender às necessidades do seu negócio.</p>
+            </div>
+            
+            <div class="feature-card animated">
+                <i class="fas fa-headset"></i>
+                <h3>Suporte Especializado</h3>
+                <p>Equipe de suporte técnico pronta para ajudar sempre que você precisar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="logo-container" style="margin-bottom: 1rem;">
+                    <div class="logo-img">
+                        <img src="Gestao.png" alt="Logo Paiva Gestão e Finanças" height="50">
+                    </div>
+                    <div class="company-name">
+                        <span style="color:white;">PAIVA</span>
+                        <span>Gestão e Finanças</span>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; color: rgba(255, 255, 255, 0.8);">Soluções integradas para transformar sua gestão com tecnologia de ponta e suporte especializado.</p>
+            
+            </div>
+            
+            <div class="footer-column">
+                <h3>Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre Nós</a></li>
+                    <li><a href="#calculators">Calculadoras</a></li>
+                    <li><a href="#features">Recursos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Calculadoras</h3>
+                <ul class="footer-links">
+                    <li><a href="agricultura.html">AgroMoçambique</a></li>
+                    <li><a href="calculadora.html">Calculadora Financeira</a></li>
+                    <li><a href="educacao.html">Educação Financeira</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Napipine, Gorongosa<br>Nampula, Mz</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(+258)87 441 3363</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>heliopaiva111@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Paiva Gestão e Finanças. Todos os direitos reservados.
+        </div>
+    </footer>
+    
+    <script>
+        // Menu toggle para mobile
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Efeito de rolagem suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Animação de entrada ao rolar
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
